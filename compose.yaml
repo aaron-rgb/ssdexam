@@ -1,0 +1,20 @@
+services:
+  nginxwebsvr:
+    image: nginx:alpine
+    container_name: nginxwebsvr
+    ports:
+      - "80:80"
+    volumes:
+      - ./website:/usr/share/nginx/html:ro        # serve your pages
+
+      # ──────────── 2) Lightweight Git server ─────────
+  git-server:
+    build:
+      context: .
+      dockerfile: gitserver.dockerfile
+    container_name: git-server
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./repos:/var/www/git 

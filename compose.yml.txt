@@ -1,0 +1,8 @@
+services:
+  nginxwebsvr:
+    image: nginx:alpine
+    container_name: nginxwebsvr
+    ports:
+      - "80:80"
+    volumes:
+      - ./website:/usr/share/nginx/html:ro        # serve your pages

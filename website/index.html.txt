@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search ‑ Home</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 600px; margin: 5rem auto; }
+    label, input { font-size: 1.1rem; }
+    form  { display: flex; gap: .5rem; }
+    #msg  { color: crimson; margin-top: .75rem; }
+  </style>
+</head>
+<body>
+  <h1>Simple Search</h1>
+
+  <form id="searchForm">
+    <label for="term">Search term:</label>
+    <input id="term" name="term" required autocomplete="off" />
+    <button type="submit">Go</button>
+  </form>
+
+  <div id="msg"></div>
+
+  <script>
+  const form  = document.getElementById('searchForm');
+  const termI = document.getElementById('term');
+  const msg   = document.getElementById('msg');
+
+  /* --------------- Simple client‑side validators --------------- */
+  const xssRe  = /<\/?script\b|on\w+\s*=|javascript:/i;   // tags, handlers, JS URIs
+  const sqlRe  = /(\b(union|select|insert|update|delete|drop|or|and)\b.*\b(from|where|table)\b)|(--|#|;)/i;
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();                     // we’ll decide where to go
+
+    const value = termI.value.trim();
+    msg.textContent = '';                   // clear old feedback
+
+    if (xssRe.test(value)) {
+      termI.value = '';
+      msg.textContent = 'XSS attempt blocked. Please try again.';
+      return;
+    }
+
+    if (sqlRe.test(value)) {
+      termI.value = '';
+      msg.textContent = 'Possible SQL‑injection attempt blocked. Please try again.';
+      return;
+    }
+
+    /* ---------- Looks good: stash + navigate ---------- */
+    localStorage.setItem('lastSearch', value);
+    window.location.href = 'result.html';   // guaranteed page change
+  });
+</script>
+
+</body>
+</html>

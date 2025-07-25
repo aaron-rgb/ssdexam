@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search Result</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 600px; margin: 5rem auto; text-align: center; }
+    button { margin-top: 2rem; padding: .5rem 1rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Search Term</h1>
+  <p id="output"></p>
+
+  <button onclick="goHome()">Back to Home</button>
+
+  <script>
+    const out = document.getElementById('output');
+    // Pull the term that was stashed in localStorage
+    const term = localStorage.getItem('lastSearch') ?? '';
+    out.textContent = term ? `"${term}"` : '(nothing provided)';
+    function goHome() { window.location.href = 'index.html'; }
+  </script>
+</body>
+</html>
