@@ -1,0 +1,24 @@
+{
+  "name": "ssdexam",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaron-rgb/ssdexam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaron-rgb/ssdexam/issues"
+  },
+  "homepage": "https://github.com/aaron-rgb/ssdexam#readme",
+  "description": "",
+  "devDependencies": {
+    "mocha": "^11.7.1",
+    "selenium-webdriver": "^4.34.0"
+  }
+}
